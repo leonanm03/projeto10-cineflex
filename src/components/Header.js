@@ -9,11 +9,12 @@ export default function Header() {
 }
 
 const HeaderDiv = styled.div`
+position: fixed;
+top: 0;
+left: calc(50% - 188px);
 background-color: #C3CFD9;
-max-width: 375px;
+width: 376px;
 height: 67px;
-margin-right: auto;
-margin-left: auto;
 display: flex;
 justify-content: center;
 align-items: center;
