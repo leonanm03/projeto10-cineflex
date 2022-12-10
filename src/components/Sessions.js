@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import Footer from "./Footer"
 
 export default function Sessions() {
 
@@ -21,86 +22,111 @@ export default function Sessions() {
 
     if (!sessionslist) {
         return (
-            <SessionDiv> Carregando...</SessionDiv>
+            <SessionsUl> Carregando...</SessionsUl>
         )
     }
 
     return (
-        <>
-            <SessionDiv>
-                <h1>Selecione o horário</h1>
+        <SessionsContainer>
+            <Title>Selecione o horário</Title>
+            <SessionsUl>
+                {sessionslist.days.map((s) => (
+                    <Session key={s.id}>
+                        <h1>
+                            {s.weekday} - {s.date}
+                        </h1>
+                        {s.showtimes.map((time) => (
+                            // <link key={time.id} to={`/assentos/${time.id}`}>
+                            <button key={time.id}>{time.name}</button>
+                            // </link>
+                        ))}
+                    </Session>
+                ))}
 
-            </SessionDiv>
+            </SessionsUl>
 
-            <FooterDiv>
-                <div><img src={sessionslist.posterURL} alt={sessionslist.title} /></div>
-                <h1>{sessionslist.title}</h1>
+            <Footer sessionslist={sessionslist} />
 
-            </FooterDiv>
-        </>
+
+        </SessionsContainer>
 
 
     )
 
 }
 
-const SessionDiv = styled.div`
-margin-top: 67px;
-margin-left: calc(50% - 188px);
-width: 376px;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
-border-color: #C3CFD9;
-border-right: 2px;
-    h1{
-        height: 110px;
-        font-family: 'Roboto';
+const SessionsContainer = styled.div`
+    margin-top: 67px;
+    margin-left: calc(50% - 188px);
+    width: 376px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-color: #C3CFD9;
+    border-right: 2px;
+    padding-bottom: 117px;    
+`;
+
+const Title = styled.h1`
+    height: 110px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #293845;
+`
+
+
+const SessionsUl = styled.ul`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-color: #C3CFD9;
+    border-right: 2px;
+    
+    `
+
+const Session = styled.li`
+    width: 100%; 
+    padding-left: 23px;
+    margin-bottom: 20px;
+    h1 {
+        height: 30px;
+        font-family: "Roboto";
         font-style: normal;
         font-weight: 400;
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 20px;
         display: flex;
         align-items: center;
-        text-align: center;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.02em;
     }
-    
-`
-const FooterDiv = styled.div`
-position: fixed;
-bottom: 0;
-left: calc(50% - 188px);
-background-color: #DFE6ED;
-width: 376px;
-height: 117px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-border: 1px solid #9EADBA;
-    div{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 64px;
-        height: 89px;
-        background: #FFFFFF;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        border-radius: 2px;
-        margin-left:10px;
-        img{
-            width: 48px;
-            height: 72px;
+    button {
+        width: 82px;
+        height: 43px;
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        letter-spacing: 0.02em;
+        margin-right: 8px;
+        background-color: #e8833a;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+
+        &:hover{
+        cursor: pointer;
+        background-color: #f4a261; 
         }
     }
-    h1{
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 26px;
-        line-height: 40px;
-        margin-left: 14px;
-    }   
-
-`
+  
+`;

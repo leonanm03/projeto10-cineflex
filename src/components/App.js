@@ -1,12 +1,12 @@
 import Header from "./Header";
-import Route from "./Route";
+import Home from "./Home";
 import Sessions from "./Sessions";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      {/* <Route /> */}
+      {/* <Home /> */}
       <Sessions />
 
     </div>

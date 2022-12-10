@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
 
-export default function Route() {
+export default function Home() {
     const [movieslist, setMovieslist] = useState(null)
 
     useEffect(() => {
@@ -15,25 +15,25 @@ export default function Route() {
 
     if (!movieslist) {
         return (
-            <RouteDiv> Carregando...</RouteDiv>
+            <HomeDiv> Carregando...</HomeDiv>
         )
     }
 
     return (
-        <RouteDiv>
+        <HomeDiv>
             <h1>Selecione o filme</h1>
 
-            <MoviesDiv>
+            <MoviesUl>
                 {movieslist.map((m) => (
-                    <div key={m.id}>  <img src={m.posterURL} alt="posterURL"></img></div>
+                    <li key={m.id}>  <img src={m.posterURL} alt="posterURL"></img></li>
                 ))}
-            </MoviesDiv>
-        </RouteDiv>
+            </MoviesUl>
+        </HomeDiv>
     )
 
 }
 
-const RouteDiv = styled.div`
+const HomeDiv = styled.div`
 margin-top: 67px;
 margin-left: calc(50% - 188px);
 width: 376px;
@@ -58,12 +58,12 @@ border-right: 2px;
     }
     
 `
-const MoviesDiv = styled.div`
+const MoviesUl = styled.ul`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     row-gap: 27px;
-        div{
+        li{
             display:flex;
             justify-content: center;
             align-items: center;
