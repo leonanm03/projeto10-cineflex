@@ -22,6 +22,7 @@ export default function Seats({ setDemand }) {
         () => {
             const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/showtimes/${id}/seats`)
             promise.then(r => {
+                console.log(r.data)
                 setSession(r.data)
                 setMovie(r.data.movie)
                 setDay(r.data.day)
@@ -59,7 +60,6 @@ export default function Seats({ setDemand }) {
             })
             promise.catch(err => alert(err.response.message))
         }
-
     };
 
 
@@ -128,7 +128,7 @@ export default function Seats({ setDemand }) {
             </Container>
             <Footer posterURL={movie.posterURL} >
                 <h1>{`${movie.title}`}</h1>
-                <h1>{`${day.weekday} - ${day.date}`}</h1>
+                <h1>{`${day.weekday} - ${session.name}`}</h1>
             </Footer>
         </>
     );
