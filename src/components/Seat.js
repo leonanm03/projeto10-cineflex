@@ -28,9 +28,9 @@ export default function Seat(
   }
 
 
-  if (!isAvailable) return (<ButtonUnavailable onClick={() => alert("Esse assento não está disponíve")} >{name}</ButtonUnavailable>);
-  else if (!selected) return (<Button onClick={toggleSeat}>{name}</Button>);
-  else return (<ButtonSelected onClick={toggleSeat}>{name}</ButtonSelected>);
+  if (!isAvailable) return (<ButtonUnavailable data-test="seat" onClick={() => alert("Esse assento não está disponíve")} >{name}</ButtonUnavailable>);
+  else if (!selected) return (<Button data-test="seat" onClick={toggleSeat}>{name}</Button>);
+  else return (<ButtonSelected data-test="seat" onClick={toggleSeat}>{name}</ButtonSelected>);
 }
 
 

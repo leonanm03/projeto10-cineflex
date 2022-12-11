@@ -101,6 +101,7 @@ export default function Seats({ setDemand }) {
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Digite seu nome..."
                             required
+                            data-test="client-name"
                         />
                     </Inputs>
 
@@ -113,10 +114,11 @@ export default function Seats({ setDemand }) {
                             onChange={(e) => setCpf(e.target.value)}
                             placeholder="Digite seu CPF..."
                             required
+                            data-test="client-cpf"
                         />
                     </Inputs>
 
-                    <Button><button type="submit" >Reservar assento(s)</button></Button>
+                    <Button><button data-test="book-seat-btn" type="submit" >Reservar assento(s)</button></Button>
                 </form>
             </Container>
             <Footer posterURL={movie.posterURL} >

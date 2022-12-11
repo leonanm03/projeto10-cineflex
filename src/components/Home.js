@@ -27,7 +27,7 @@ export default function Home() {
 
             <MoviesUl>
                 {movieslist.map((m) => (
-                    <li key={m.id}>  <Link to={`/sessoes/${m.id}`}><img src={m.posterURL} alt="posterURL"></img></Link></li>
+                    <li key={m.id} data-test="movie" >  <Link to={`/sessoes/${m.id}`}><img src={m.posterURL} alt="posterURL"></img></Link></li>
                 ))}
             </MoviesUl>
         </Container>

@@ -18,7 +18,7 @@ export default function Sessions() {
         promise.catch((err) => alert(err.response.data.message))
     }
 
-        , [])
+        , [id])
 
     if (!sessions) {
         return (
@@ -31,13 +31,13 @@ export default function Sessions() {
             <Title>Selecione o horário</Title>
             <SessionsUl>
                 {sessions.days.map((s) => (
-                    <Session key={s.id}>
+                    <Session key={s.id} data-test="movie-day" >
                         <h1>
                             {s.weekday} - {s.date}
                         </h1>
                         {s.showtimes.map((time) => (
                             <Link key={time.id} to={`/assentos/${time.id}`}>
-                                <button key={time.id}>{time.name}</button>
+                                <button key={time.id} data-test="showtime" >{time.name}</button>
                             </Link>
                         ))}
                     </Session>

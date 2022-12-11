@@ -5,7 +5,7 @@ import styled from "styled-components"
 export default function Footer({ posterURL, children }) {
 
     return (
-        <FooterDiv>
+        <FooterDiv data-test="Footer" >
             <Img><img src={posterURL} alt={posterURL} /></Img>
             <TextContainer>
                 {children}

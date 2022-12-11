@@ -39,7 +39,7 @@ export default function Success({ demand }) {
       </TextDiv>
       <Link to="/" >
         <Button>
-          <button >Voltar para Home</button>
+          <button data-test="go-home-btn" >Voltar para Home</button>
         </Button>
       </Link>
     </Container>
