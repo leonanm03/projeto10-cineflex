@@ -7,7 +7,7 @@ export default function Seat({ seat }) {
 
     return (
         <>
-            <Button>{seat.id}</Button>
+            <Button>{seat.name}</Button>
         </>
     );
 }

@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import { Container, Title } from "../styles/Container"
 
@@ -26,7 +27,7 @@ export default function Home() {
 
             <MoviesUl>
                 {movieslist.map((m) => (
-                    <li key={m.id}>  <img src={m.posterURL} alt="posterURL"></img></li>
+                    <li key={m.id}>  <Link to={`/sessoes/${m.id}`}><img src={m.posterURL} alt="posterURL"></img></Link></li>
                 ))}
             </MoviesUl>
         </Container>

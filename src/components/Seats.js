@@ -1,17 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Container, Title } from "../styles/Container";
 import Footer from "./Footer";
 import Seat from "./Seat";
 
 export default function Seats() {
-    const id = 1;
     const [session, setSession] = useState({});
-    const [name, setName] = useState(null);
-    const [cpf, setCpf] = useState(null);
+    const [name, setName] = useState("");
+    const [cpf, setCpf] = useState("");
     const [movie, setMovie] = useState({ posterURL: "", title: "", date: "" });
-    const [day, setDay] = useState({date:"", weekday:""})
+    const [day, setDay] = useState({ date: "", weekday: "" })
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(
         () => {
@@ -25,6 +27,12 @@ export default function Seats() {
             promise.catch((err) => alert(err.response.data.message))
         }
         , [])
+
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        navigate("/sucesso");
+    };
 
 
 
@@ -58,13 +66,13 @@ export default function Seats() {
                         <p>Indisponível</p>
                     </Description>
                 </Descriptions>
-                <form >
+                <form onSubmit={handleSubmit}>
                     <Inputs>
                         <label htmlFor="name">Nome do comprador:</label>
                         <input
                             type="text"
                             name="name"
-                            value=""
+                            value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Digite seu nome..."
                             required
@@ -76,7 +84,7 @@ export default function Seats() {
                         <input
                             type="text"
                             id="cpf"
-                            value=""
+                            value={cpf}
                             onChange={(e) => setCpf(e.target.value)}
                             placeholder="Digite seu CPF..."
                             required
@@ -86,7 +94,10 @@ export default function Seats() {
                     <Button><button type="submit" >Reservar assento(s)</button></Button>
                 </form>
             </Container>
-            <Footer posterURL={movie.posterURL} title={movie.title} > <h1>{`${day.weekday} - ${day.date}`}</h1>  </Footer>
+            <Footer posterURL={movie.posterURL} >
+                <h1>{`${movie.title}`}</h1>
+                <h1>{`${day.weekday} - ${day.date}`}</h1>
+            </Footer>
         </>
     );
 }

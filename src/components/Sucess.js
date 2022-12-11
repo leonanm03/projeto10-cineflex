@@ -2,36 +2,36 @@
 import styled from "styled-components";
 import { Container } from "../styles/Container";
 
-export default function Success() {
+export default function Success({ demand }) {
 
-    const seats = [1, 2, 3, 4]
+  const seats = [1, 2, 3, 4]
 
-    return (
-        <Container>
-            <TitleSucess>
-                <h1>Pedido feito com sucesso!</h1>
-            </TitleSucess>
-            <TextDiv data-test="movie-info">
-                <h3>Filme e sessão</h3>
-                <p>Titulo</p>
-                <p>data</p>
-            </TextDiv>
-            <TextDiv data-test="seats-info">
-                <h3>Ingressos</h3>
-                {seats.map((seat) => (
-                    <p key={seat}>Assento {seat}</p>
-                ))}
-            </TextDiv>
-            <TextDiv data-test="client-info">
-                <h3>Comprador</h3>
-                <p>Nome: Zezinho</p>
-                <p>CPF: 999.999.999.44</p>
-            </TextDiv>
-            <Button>
-                <button >Voltar para Home</button>
-            </Button>
-        </Container>
-    );
+  return (
+    <Container>
+      <TitleSucess>
+        <h1>Pedido feito com sucesso!</h1>
+      </TitleSucess>
+      <TextDiv data-test="movie-info">
+        <h3>Filme e sessão</h3>
+        <p>Titulo</p>
+        <p>data</p>
+      </TextDiv>
+      <TextDiv data-test="seats-info">
+        <h3>Ingressos</h3>
+        {seats.map((seat) => (
+          <p key={seat}>Assento {seat}</p>
+        ))}
+      </TextDiv>
+      <TextDiv data-test="client-info">
+        <h3>Comprador</h3>
+        <p>Nome: Zezinho</p>
+        <p>CPF: 999.999.999.44</p>
+      </TextDiv>
+      <Button>
+        <button >Voltar para Home</button>
+      </Button>
+    </Container>
+  );
 }
 
 const TitleSucess = styled.div`

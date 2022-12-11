@@ -1,26 +1,26 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
 import styled from "styled-components"
 import { Container, Title } from "../styles/Container"
 import Footer from "./Footer"
 
 export default function Sessions() {
-
-    const [sessionslist, setSessionslist] = useState(null)
+    const { id } = useParams()
+    const [sessions, setSessions] = useState(null)
 
 
     useEffect(() => {
-        const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes")
+        const promise = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${id}/showtimes`)
         promise.then((res) => {
-            setSessionslist(res.data)
-            console.log(res.data)
+            setSessions(res.data)
         })
         promise.catch((err) => alert(err.response.data.message))
     }
 
         , [])
 
-    if (!sessionslist) {
+    if (!sessions) {
         return (
             <Container> Carregando...</Container>
         )
@@ -30,25 +30,24 @@ export default function Sessions() {
         <Container>
             <Title>Selecione o horário</Title>
             <SessionsUl>
-                {sessionslist.days.map((s) => (
+                {sessions.days.map((s) => (
                     <Session key={s.id}>
                         <h1>
                             {s.weekday} - {s.date}
                         </h1>
                         {s.showtimes.map((time) => (
-                            // <link key={time.id} to={`/assentos/${time.id}`}>
-                            <button key={time.id}>{time.name}</button>
-                            // </link>
+                            <Link key={time.id} to={`/assentos/${time.id}`}>
+                                <button key={time.id}>{time.name}</button>
+                            </Link>
                         ))}
                     </Session>
                 ))}
 
             </SessionsUl>
 
-            <Footer
-                posterURL={sessionslist.posterURL}
-                title={sessionslist.title}
-            ></Footer>
+            <Footer posterURL={sessions.posterURL}            >
+                <h1>{`${sessions.title}`}</h1>
+            </Footer>
 
         </Container>
 

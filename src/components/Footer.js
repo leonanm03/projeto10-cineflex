@@ -2,13 +2,12 @@ import styled from "styled-components"
 
 
 
-export default function Footer({ posterURL, title, children }) {
+export default function Footer({ posterURL, children }) {
 
     return (
         <FooterDiv>
-            <Img><img src={posterURL} alt={title} /></Img>
+            <Img><img src={posterURL} alt={posterURL} /></Img>
             <TextContainer>
-                <h1>{title}</h1>
                 {children}
             </TextContainer>
 
