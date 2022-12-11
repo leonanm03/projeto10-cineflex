@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import { Container, Title } from "../styles/Container"
 import Footer from "./Footer"
 
 export default function Sessions() {
@@ -11,9 +12,8 @@ export default function Sessions() {
     useEffect(() => {
         const promise = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes")
         promise.then((res) => {
-            console.log(res.data)
             setSessionslist(res.data)
-
+            console.log(res.data)
         })
         promise.catch((err) => alert(err.response.data.message))
     }
@@ -22,12 +22,12 @@ export default function Sessions() {
 
     if (!sessionslist) {
         return (
-            <SessionsUl> Carregando...</SessionsUl>
+            <Container> Carregando...</Container>
         )
     }
 
     return (
-        <SessionsContainer>
+        <Container>
             <Title>Selecione o horário</Title>
             <SessionsUl>
                 {sessionslist.days.map((s) => (
@@ -45,43 +45,17 @@ export default function Sessions() {
 
             </SessionsUl>
 
-            <Footer sessionslist={sessionslist} />
+            <Footer
+                posterURL={sessionslist.posterURL}
+                title={sessionslist.title}
+            ></Footer>
 
-
-        </SessionsContainer>
+        </Container>
 
 
     )
 
 }
-
-const SessionsContainer = styled.div`
-    margin-top: 67px;
-    margin-left: calc(50% - 188px);
-    width: 376px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    border-color: #C3CFD9;
-    border-right: 2px;
-    padding-bottom: 117px;    
-`;
-
-const Title = styled.h1`
-    height: 110px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.04em;
-    color: #293845;
-`
-
 
 const SessionsUl = styled.ul`
     display: flex;

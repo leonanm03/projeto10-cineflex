@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
+import { Container, Title } from "../styles/Container"
 
 export default function Home() {
     const [movieslist, setMovieslist] = useState(null)
@@ -15,49 +16,24 @@ export default function Home() {
 
     if (!movieslist) {
         return (
-            <HomeDiv> Carregando...</HomeDiv>
+            <Container> Carregando...</Container>
         )
     }
 
     return (
-        <HomeDiv>
-            <h1>Selecione o filme</h1>
+        <Container>
+            <Title>Selecione o filme</Title>
 
             <MoviesUl>
                 {movieslist.map((m) => (
                     <li key={m.id}>  <img src={m.posterURL} alt="posterURL"></img></li>
                 ))}
             </MoviesUl>
-        </HomeDiv>
+        </Container>
     )
 
 }
 
-const HomeDiv = styled.div`
-margin-top: 67px;
-margin-left: calc(50% - 188px);
-width: 376px;
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-align-items: center;
-border-color: #C3CFD9;
-border-right: 2px;
-    h1{
-        height: 110px;
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 28px;
-        display: flex;
-        align-items: center;
-        text-align: center;
-        letter-spacing: 0.04em;
-        color: #293845;
-    }
-    
-`
 const MoviesUl = styled.ul`
     display: flex;
     flex-wrap: wrap;
@@ -73,9 +49,9 @@ const MoviesUl = styled.ul`
             box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
             border-radius: 3px;
 
-                img{
-                    width: 129px;
-                    height: 193px;
-                }
+            img{
+                width: 129px;
+                height: 193px;
+            }
         }
     `

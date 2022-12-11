@@ -1,5 +1,6 @@
 import Header from "./Header";
 import Home from "./Home";
+import Seats from "./Seats";
 import Sessions from "./Sessions";
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
     <div className="App">
       <Header />
       {/* <Home /> */}
-      <Sessions />
+      {/* <Sessions />  */}
+      <Seats/>
 
     </div>
   );
