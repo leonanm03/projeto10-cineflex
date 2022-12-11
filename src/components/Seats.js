@@ -34,26 +34,31 @@ export default function Seats({ setDemand }) {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const request = {
-            ids: seatsSelected,
-            name: name,
-            cof: cpf
+        if (!seatsSelected.length) {
+            alert("você precisa selecionar pelo menos 1 assento")
         }
+        else {
+            const request = {
+                ids: seatsSelected,
+                name: name,
+                cof: cpf
+            }
 
-        const promise = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", request)
-        promise.then(() => {
-            setDemand(
-                {
-                    title: movie.title,
-                    date: `${day.date} ${session.name}`,
-                    name: name,
-                    cpf: cpf,
-                    seats: seatsNumbers
-                }
-            )
-            navigate("/sucesso");
-        })
-        promise.catch(err => alert(err.response.message))
+            const promise = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", request)
+            promise.then(() => {
+                setDemand(
+                    {
+                        title: movie.title,
+                        date: `${day.date} ${session.name}`,
+                        name: name,
+                        cpf: cpf,
+                        seats: seatsNumbers
+                    }
+                )
+                navigate("/sucesso");
+            })
+            promise.catch(err => alert(err.response.message))
+        }
 
     };
 
