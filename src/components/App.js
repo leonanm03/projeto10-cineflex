@@ -2,6 +2,7 @@ import Header from "./Header";
 import Home from "./Home";
 import Seats from "./Seats";
 import Sessions from "./Sessions";
+import Success from "./Sucess";
 
 function App() {
   return (
@@ -9,7 +10,8 @@ function App() {
       <Header />
       {/* <Home /> */}
       {/* <Sessions />  */}
-      <Seats/>
+      {/* <Seats/> */}
+      <Success/>
 
     </div>
   );
