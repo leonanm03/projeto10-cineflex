@@ -1,10 +1,20 @@
 
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../styles/Container";
 
 export default function Success({ demand }) {
+  const { title, date, name, cpf, seats } = { ...demand }
 
-  const seats = [1, 2, 3, 4]
+  // function pra mostrar o cpf no formato XXX.XXX.XXX-XX
+  const cpfMask = value => {
+    return value
+      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+      .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+  }
 
   return (
     <Container>
@@ -13,8 +23,8 @@ export default function Success({ demand }) {
       </TitleSucess>
       <TextDiv data-test="movie-info">
         <h3>Filme e sessão</h3>
-        <p>Titulo</p>
-        <p>data</p>
+        <p>{title}</p>
+        <p>{date}</p>
       </TextDiv>
       <TextDiv data-test="seats-info">
         <h3>Ingressos</h3>
@@ -24,12 +34,14 @@ export default function Success({ demand }) {
       </TextDiv>
       <TextDiv data-test="client-info">
         <h3>Comprador</h3>
-        <p>Nome: Zezinho</p>
-        <p>CPF: 999.999.999.44</p>
+        <p>Nome: {name}</p>
+        <p>CPF: {cpfMask(cpf)}</p>
       </TextDiv>
-      <Button>
-        <button >Voltar para Home</button>
-      </Button>
+      <Link to="/" >
+        <Button>
+          <button >Voltar para Home</button>
+        </Button>
+      </Link>
     </Container>
   );
 }

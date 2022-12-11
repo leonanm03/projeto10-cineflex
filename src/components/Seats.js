@@ -6,12 +6,15 @@ import { Container, Title } from "../styles/Container";
 import Footer from "./Footer";
 import Seat from "./Seat";
 
-export default function Seats() {
+export default function Seats({ setDemand }) {
     const [session, setSession] = useState({});
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
     const [movie, setMovie] = useState({ posterURL: "", title: "", date: "" });
     const [day, setDay] = useState({ date: "", weekday: "" })
+    const [seatsSelected, setSeatsSelected] = useState([])
+    const [seatsNumbers, setSeatsNumbers] = useState([])
+
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -22,16 +25,36 @@ export default function Seats() {
                 setSession(r.data)
                 setMovie(r.data.movie)
                 setDay(r.data.day)
-
             })
             promise.catch((err) => alert(err.response.data.message))
         }
-        , [])
+        , [id])
 
 
     function handleSubmit(e) {
         e.preventDefault();
-        navigate("/sucesso");
+
+        const request = {
+            ids: seatsSelected,
+            name: name,
+            cof: cpf
+        }
+
+        const promise = axios.post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", request)
+        promise.then(() => {
+            setDemand(
+                {
+                    title: movie.title,
+                    date: `${day.date} ${session.name}`,
+                    name: name,
+                    cpf: cpf,
+                    seats: seatsNumbers
+                }
+            )
+            navigate("/sucesso");
+        })
+        promise.catch(err => alert(err.response.message))
+
     };
 
 
@@ -48,6 +71,8 @@ export default function Seats() {
                             <Seat
                                 key={seat.id}
                                 seat={seat}
+                                seatsSelected={seatsSelected} setSeatsSelected={setSeatsSelected}
+                                seatsNumbers={seatsNumbers} setSeatsNumbers={setSeatsNumbers}
                             />
                         );
                     })}

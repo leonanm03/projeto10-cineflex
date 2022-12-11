@@ -1,15 +1,36 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 
-export default function Seat({ seat }) {
-    // console.log(props)
+export default function Seat(
+  { seat, seatsSelected, setSeatsSelected,
+    seatsNumbers, setSeatsNumbers }) {
+
+  const { id, name, isAvailable } = { ...seat }
+  const [selected, setSelected] = useState(false)
+
+  function toggleSeat() {
+    if (!selected) {
+      setSeatsSelected([...seatsSelected, id])
+      setSeatsNumbers([...seatsNumbers, name])
+    }
+    else {
+      const position = seatsSelected.indexOf(id)
+      const newSeats = [...seatsSelected]
+      const newNumbers = [...seatsNumbers]
+      newSeats.splice(position, 1)
+      newNumbers.splice(position, 1)
+      setSeatsSelected(newSeats)
+      setSeatsNumbers(newNumbers)
+    }
+
+    setSelected(!selected)
+  }
 
 
-    return (
-        <>
-            <Button>{seat.name}</Button>
-        </>
-    );
+  if (!isAvailable) return (<ButtonUnavailable onClick={() => alert("Esse assento não está disponíve")} >{name}</ButtonUnavailable>);
+  else if (!selected) return (<Button onClick={toggleSeat}>{name}</Button>);
+  else return (<ButtonSelected onClick={toggleSeat}>{name}</ButtonSelected>);
 }
 
 
